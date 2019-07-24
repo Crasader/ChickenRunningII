@@ -1,0 +1,86 @@
+bool AppDelegate::applicationDidFinishLaunching() {
+// initialize director
+auto director = Director::getInstance();
+auto glview = director->getOpenGLView();
+if(!glview) {
+glview = GLView::create("My Game");
+director->setOpenGLView(glview);
+}
+
+
+// turn off display FPS
+director->setDisplayStats(false);
+
+// set FPS. the default value is 1.0/60 if you don't call this
+director->setAnimationInterval(1.0 / 60);
+
+auto screenSize = glview->getFrameSize();
+
+auto fileUtils = FileUtils::getInstance();
+std::vector<std::string> searchPaths;
+
+if (screenSize.width == 2048 || screenSize.height == 2048)
+{
+glview -> setDesignResolutionSize(1536, 2048, ResolutionPolicy::NO_BORDER);
+searchPaths.push_back("ipadhd");
+searchPaths.push_back("ipadsd");
+searchPaths.push_back("iphone5");
+searchPaths.push_back("iphonehd");
+searchPaths.push_back("iphonesd");
+}
+else if (screenSize.width == 1024 || screenSize.height == 1024)
+{
+glview -> setDesignResolutionSize(768, 1024, ResolutionPolicy::NO_BORDER);
+searchPaths.push_back("ipadsd");
+searchPaths.push_back("iphone5");
+searchPaths.push_back("iphonehd");
+searchPaths.push_back("iphonesd");
+
+}
+else if (screenSize.width == 1136 || screenSize.height == 1136)
+{
+glview -> setDesignResolutionSize(640, 1136, ResolutionPolicy::NO_BORDER);
+searchPaths.push_back("iphone5");
+searchPaths.push_back("iphonehd");
+searchPaths.push_back("iphonesd");
+
+}
+else if (screenSize.width == 960 || screenSize.height == 960)
+{
+glview -> setDesignResolutionSize(640, 960, ResolutionPolicy::NO_BORDER);
+searchPaths.push_back("iphonehd");
+searchPaths.push_back("iphonesd");
+}
+else
+{
+searchPaths.push_back("iphonesd");
+glview -> setDesignResolutionSize(320, 480, ResolutionPolicy::NO_BORDER);
+}
+
+fileUtils->setSearchPaths(searchPaths);
+
+//Load your first scene
+auto scene = GameManager::createScene();
+director->runWithScene(scene);
+
+return true;
+}
+
+Chicken Running is an addictive and unique puzzle game in which you shift keys around the board catching the insect.
+小鸡快跑是一个类似于推箱子游戏的一个智力游戏，可以滑动手指，指挥小鸡去捉虫子。
+
+
+
+The Goal
+
+You are a Chicken who has hunt the insect. You must hunt them all! Swipe the screen to move your chicken. All the keys move at the same time.
+
+You can move them LEFT, RIGHT, and DOWN, but NOT UP. Be careful. There are 120 levels, split into four 30-level regions.
+
+
+Tips
+
+If you run out of moves, Please to restart the level from the menu.
+
+If you completely can’t figure out how to pass a level, solutions to all levels are posted at:
+
